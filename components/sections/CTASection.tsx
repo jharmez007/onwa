@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion, useInView, useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect, useRef } from "react";
 import Button from "@/components/ui/Button";
@@ -111,10 +112,14 @@ export default function CTASection() {
             viewport={{ once: true }}
             className="mt-10 flex items-center justify-center gap-4 flex-wrap"
           >
-            <Button>Get Started</Button>
-            <button className="text-[13px] font-medium tracking-[0.04em] uppercase text-[#F7F5F0]/50 hover:text-[#F7F5F0] transition-colors duration-200 px-2 py-[15px]">
-              Contact Us →
-            </button>
+            <Link href="/contact">
+              <Button>Get Started</Button>
+            </Link>
+            <Link href="/contact">
+              <button className="text-[13px] font-medium tracking-[0.04em] uppercase text-[#F7F5F0]/50 hover:text-[#F7F5F0] transition-colors duration-200 px-2 py-[15px]">
+                Contact Us →
+              </button>
+            </Link>
           </motion.div>
         </div>
 

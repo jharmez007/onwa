@@ -32,7 +32,7 @@ export async function POST(req: Request) {
     // ── 1. ADMIN NOTIFICATION ──────────────────────────────────────────────
     await resend.emails.send({
       from: "onboarding@resend.dev",
-      to: "jamesagu2001@gmail.com",
+      to: "cajetanemeka@yahoo.com",
       subject: `New ${inquiryLabel} from ${name}`,
       html: `
 <!DOCTYPE html>
@@ -232,7 +232,7 @@ export async function POST(req: Request) {
         <!-- CTA -->
         <tr>
           <td style="padding:32px 40px;">
-            <a href="https://yourdomain.com"
+            <a href="https://onwa-iota.vercel.app/contact"
                style="display:inline-block;background:#1A1814;color:#F7F5F0;font-family:Arial,sans-serif;font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">
               Visit Our Website
             </a>
@@ -249,12 +249,12 @@ export async function POST(req: Request) {
                     © ${new Date().getFullYear()} Onwa-na Aku. All rights reserved.
                   </p>
                   <p style="margin:0;font-family:Arial,sans-serif;font-size:11px;color:#B0ADA8;">
-                    123 Portside Avenue, Lagos, Nigeria
+                    21 Road, 2nd Avenue, Festac Town, Lagos, Nigeria
                   </p>
                 </td>
                 <td align="right" style="vertical-align:top;">
                   <p style="margin:0;font-family:Arial,sans-serif;font-size:11px;color:#B0ADA8;">
-                    info@onwanaaku.example
+                    cajetanemeka@yahoo.com
                   </p>
                 </td>
               </tr>

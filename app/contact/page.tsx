@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import Button from "@/components/ui/Button";
 
@@ -342,8 +343,8 @@ export default function ContactPage() {
               </span>
               <div className="flex flex-col gap-3">
                 {[
-                  { label: "Email",  value: "info@onwanaaku.example" },
-                  { label: "Phone",  value: "+234 800 123 4567"      },
+                  { label: "Email",  value: "cajetanemeka@yahoo.com" },
+                  { label: "Phone",  value: "+234 806 087 3957"      },
                 ].map((item) => (
                   <div key={item.label}>
                     <p className="text-[10px] font-medium tracking-[0.08em] uppercase text-[#B0ADA8] mb-0.5">
@@ -362,10 +363,9 @@ export default function ContactPage() {
               </span>
               <div className="flex flex-col gap-3">
                 {[
-                  { city: "Lagos",     address: "123 Portside Avenue, Lagos, Nigeria" },
-                  { city: "Dubai",     address: "Global Trade Centre, Dubai, UAE"     },
-                  { city: "Rotterdam", address: "Harbourside Tower, Rotterdam, NL"    },
-                  { city: "Singapore", address: "Marina Bay District, Singapore"      },
+                  { city: "Lagos",     address: "21 Road, 2nd Avenue, Festac Town, Lagos, Nigeria" },
+                  { city: "Abuja",     address: "Bitmore, Lugbe, Abuja, Nigeria"     },
+                  { city: "Manchester", address: "Harbourside Tower, Manchester, UK"    },
                 ].map((office) => (
                   <div key={office.city}>
                     <p className="text-[11px] font-medium text-[#1A1814]">
@@ -396,9 +396,11 @@ export default function ContactPage() {
                   Support agents online now
                 </span>
               </div>
-              <button className="self-start text-[12px] font-medium tracking-[0.06em] uppercase text-[#F7F5F0] border border-[#F7F5F0]/15 px-5 py-3 rounded-[2px] hover:bg-[#F7F5F0]/8 transition-colors duration-200">
-                Start Live Chat
-              </button>
+              <Link href="https://wa.me/message/H64N6ZOI6ZEMB1" target="_blank" rel="noopener noreferrer">
+                <button className="self-start text-[12px] font-medium tracking-[0.06em] uppercase text-[#F7F5F0] border border-[#F7F5F0]/15 px-5 py-3 rounded-[2px] hover:bg-[#F7F5F0]/8 transition-colors duration-200">
+                  Start Live Chat
+                </button>
+              </Link>
             </div>
           </motion.div>
         </div>
