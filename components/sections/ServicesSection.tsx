@@ -130,7 +130,9 @@ export default function ServicesSection() {
 
         {/* CTA */}
         <div className="mt-10 flex items-center gap-6">
-          <Button>Explore All Services</Button>
+          <Link href="/services#services">
+            <Button>Explore All Services</Button>
+          </Link>
           <span className="text-[12px] text-[#B0ADA8] tracking-[0.02em]">
             6 services available
           </span>
