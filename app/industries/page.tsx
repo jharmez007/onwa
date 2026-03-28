@@ -1,8 +1,39 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useInView, useMotionValue, useTransform, animate } from "framer-motion";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import Button from "@/components/ui/Button";
+
+function CountUp({
+  value,
+  suffix = "",
+  duration = 1.4,
+  delay = 0,
+}: {
+  value: number;
+  suffix?: string;
+  duration?: number;
+  delay?: number;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const motionVal = useMotionValue(0);
+  const rounded = useTransform(motionVal, (v) => `${Math.round(v * 10) / 10}${suffix}`);
+  const inView = useInView(ref, { once: true });
+
+  useEffect(() => {
+    if (!inView) return;
+    const timeout = setTimeout(() => {
+      animate(motionVal, value, {
+        duration,
+        ease: [0.16, 1, 0.3, 1],
+      });
+    }, delay * 1000);
+    return () => clearTimeout(timeout);
+  }, [inView, value, duration, delay, motionVal]);
+
+  return <motion.span ref={ref}>{rounded}</motion.span>;
+}
 
 const industries = [
   {
@@ -92,10 +123,10 @@ const industries = [
 ];
 
 const stats = [
-  { num: "6",    label: "Industries Served"   },
-  { num: "75+",  label: "Countries Connected" },
-  { num: "500+", label: "Global Partners"     },
-  { num: "20+",  label: "Years Experience"    },
+  { num: 6,   suffix: "",  label: "Industries Served",   duration: 0.8, delay: 0.7  },
+  { num: 75,  suffix: "+", label: "Countries Connected", duration: 1.3, delay: 0.85 },
+  { num: 500, suffix: "+", label: "Global Partners",     duration: 1.5, delay: 0.95 },
+  { num: 20,  suffix: "+", label: "Years Experience",    duration: 1.1, delay: 1.05 },
 ];
 
 export default function IndustriesPage() {
@@ -175,7 +206,7 @@ export default function IndustriesPage() {
                   style={{ fontFamily: "'DM Serif Display', Georgia, serif" }}
                   className="text-[36px] leading-none tracking-[-0.02em] text-[#1A1814]"
                 >
-                  {stat.num}
+                  <CountUp value={stat.num} suffix={stat.suffix} duration={stat.duration} delay={stat.delay} />
                 </div>
                 <div className="text-[11px] font-medium tracking-[0.08em] uppercase text-[#B0ADA8]">
                   {stat.label}

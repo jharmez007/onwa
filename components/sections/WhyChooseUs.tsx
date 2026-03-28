@@ -1,6 +1,40 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useInView, useMotionValue, useTransform, animate } from "framer-motion";
+import { useEffect, useRef } from "react";
+
+// ── Animated counter ──────────────────────────────────────────────────────────
+function CountUp({
+  value,
+  suffix = "",
+  prefix = "",
+  duration = 1.4,
+  delay = 0,
+}: {
+  value: number;
+  suffix?: string;
+  prefix?: string;
+  duration?: number;
+  delay?: number;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const motionVal = useMotionValue(0);
+  const rounded = useTransform(motionVal, (v) => `${prefix}${Math.round(v)}${suffix}`);
+  const inView = useInView(ref, { once: true });
+
+  useEffect(() => {
+    if (!inView) return;
+    const timeout = setTimeout(() => {
+      animate(motionVal, value, {
+        duration,
+        ease: [0.16, 1, 0.3, 1],
+      });
+    }, delay * 1000);
+    return () => clearTimeout(timeout);
+  }, [inView, value, duration, delay, motionVal]);
+
+  return <motion.span ref={ref}>{rounded}</motion.span>;
+}
 
 const features = [
   {
@@ -127,23 +161,22 @@ export default function WhyChooseUs() {
               alt="Maritime operations"
               className="w-full h-full object-cover"
             />
-            {/* Subtle warm overlay */}
             <div className="absolute inset-0 bg-[#1A1814]/10 pointer-events-none" />
           </div>
 
-          {/* Floating stat card */}
+          {/* Floating stat card — animated */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
             viewport={{ once: true }}
-            className="absolute -bottom-6 -left-6 bg-[#F7F5F0] border border-[#1A1814]/10 rounded-[4px] p-6 shadow-none"
+            className="absolute -bottom-6 -left-6 bg-[#F7F5F0] border border-[#1A1814]/10 rounded-[4px] p-6"
           >
             <div
               style={{ fontFamily: "'DM Serif Display', Georgia, serif" }}
               className="text-[36px] leading-none tracking-[-0.02em] text-[#1A1814]"
             >
-              20+
+              <CountUp value={20} suffix="+" duration={1.4} delay={0.6} />
             </div>
             <div className="mt-2 text-[11px] font-medium tracking-[0.08em] uppercase text-[#B0ADA8]">
               Years of Experience

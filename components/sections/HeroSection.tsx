@@ -1,7 +1,65 @@
 "use client";
 
-import { motion } from "framer-motion";
+import Link from "next/link";
+import { motion, useInView, useMotionValue, useTransform, animate } from "framer-motion";
+import { useEffect, useRef } from "react";
 import Button from "@/components/ui/Button";
+
+// ── Animated counter ──────────────────────────────────────────────────────────
+function CountUp({
+  value,
+  suffix = "",
+  prefix = "",
+  duration = 1.4,
+  delay = 0,
+}: {
+  value: number;
+  suffix?: string;
+  prefix?: string;
+  duration?: number;
+  delay?: number;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const motionVal = useMotionValue(0);
+  const rounded = useTransform(motionVal, (v) => `${prefix}${Math.round(v)}${suffix}`);
+  const inView = useInView(ref, { once: true });
+
+  useEffect(() => {
+    if (!inView) return;
+    const timeout = setTimeout(() => {
+      animate(motionVal, value, {
+        duration,
+        ease: [0.16, 1, 0.3, 1], // expo out — fast spin up, smooth settle
+      });
+    }, delay * 1000);
+    return () => clearTimeout(timeout);
+  }, [inView, value, duration, delay, motionVal]);
+
+  return <motion.span ref={ref}>{rounded}</motion.span>;
+}
+
+// ── Static label for non-numeric values like "24/7" ──────────────────────────
+function FlipIn({
+  text,
+  delay = 0,
+}: {
+  text: string;
+  delay?: number;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true });
+
+  return (
+    <motion.span
+      ref={ref}
+      initial={{ opacity: 0, y: 12, filter: "blur(4px)" }}
+      animate={inView ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
+      transition={{ duration: 0.5, delay, ease: [0.16, 1, 0.3, 1] }}
+    >
+      {text}
+    </motion.span>
+  );
+}
 
 export default function HeroSection() {
   return (
@@ -9,6 +67,7 @@ export default function HeroSection() {
 
       {/* LEFT */}
       <div className="relative flex flex-col justify-center px-10 py-20 lg:px-16 lg:pr-20">
+
         {/* Vertical divider */}
         <div className="hidden lg:block absolute right-0 top-[15%] bottom-[15%] w-px bg-[#1A1814]/10" />
 
@@ -45,9 +104,10 @@ export default function HeroSection() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mt-6 text-[15px] font-light leading-[1.8] text-[#6B6860] max-w-[420px]"
         >
-          We provide expert maritime consulting, efficient transport logistics,
-          and data-driven supply chain solutions to help businesses move goods
-          across borders seamlessly.
+          At Onwa-Na Aku Mega Vision Nigeria Limited, we provide expert
+          maritime consulting, efficient transport logistics, and data-driven
+          supply chain solutions to help businesses move goods across borders
+          seamlessly.
         </motion.p>
 
         {/* CTA Buttons */}
@@ -57,37 +117,59 @@ export default function HeroSection() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="flex flex-wrap items-center gap-4 mt-10"
         >
-          <Button>Get a Quote</Button>
-          <Button variant="secondary">Learn More</Button>
+          <Link href="/contact">
+            <Button>Get a Quote</Button>
+          </Link>
+          <Link href="/services">
+            <Button variant="secondary">Learn More</Button>
+          </Link>
         </motion.div>
 
-        {/* Trust Indicators */}
+        {/* Trust Indicators — animated numbers */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.55 }}
           className="flex items-center gap-0 mt-12 pt-10 border-t border-[#1A1814]/10"
         >
-          {[
-            { num: "120+", label: "Countries served" },
-            { num: "98%",  label: "On-time delivery" },
-            { num: "24/7", label: "Live operations"  },
-          ].map((item, i) => (
+          {/* 120+ */}
+          <div className="flex-1 pr-6">
             <div
-              key={item.label}
-              className={`flex-1 ${i !== 0 ? "pl-6 border-l border-[#1A1814]/10" : ""} ${i !== 2 ? "pr-6" : ""}`}
+              style={{ fontFamily: "'DM Serif Display', Georgia, serif" }}
+              className="text-[26px] leading-none tracking-[-0.02em] text-[#1A1814]"
             >
-              <div
-                style={{ fontFamily: "'DM Serif Display', Georgia, serif" }}
-                className="text-[26px] leading-none tracking-[-0.02em] text-[#1A1814]"
-              >
-                {item.num}
-              </div>
-              <div className="mt-1.5 text-[11px] uppercase tracking-[0.06em] text-[#B0ADA8]">
-                {item.label}
-              </div>
+              <CountUp value={120} suffix="+" duration={1.4} delay={0.7} />
             </div>
-          ))}
+            <div className="mt-1.5 text-[11px] uppercase tracking-[0.06em] text-[#B0ADA8]">
+              Countries served
+            </div>
+          </div>
+
+          {/* 98% */}
+          <div className="flex-1 px-6 border-l border-[#1A1814]/10">
+            <div
+              style={{ fontFamily: "'DM Serif Display', Georgia, serif" }}
+              className="text-[26px] leading-none tracking-[-0.02em] text-[#1A1814]"
+            >
+              <CountUp value={98} suffix="%" duration={1.2} delay={0.85} />
+            </div>
+            <div className="mt-1.5 text-[11px] uppercase tracking-[0.06em] text-[#B0ADA8]">
+              On-time delivery
+            </div>
+          </div>
+
+          {/* 24/7 — not a number, use flip-in */}
+          <div className="flex-1 pl-6 border-l border-[#1A1814]/10">
+            <div
+              style={{ fontFamily: "'DM Serif Display', Georgia, serif" }}
+              className="text-[26px] leading-none tracking-[-0.02em] text-[#1A1814]"
+            >
+              <FlipIn text="24/7" delay={1} />
+            </div>
+            <div className="mt-1.5 text-[11px] uppercase tracking-[0.06em] text-[#B0ADA8]">
+              Live operations
+            </div>
+          </div>
         </motion.div>
       </div>
 
@@ -114,7 +196,7 @@ export default function HeroSection() {
           transition={{ duration: 0.5, delay: 1 }}
           className="absolute top-8 right-8 bg-[#C4873A] text-white text-[10px] font-medium tracking-[0.1em] uppercase px-3.5 py-1.5 rounded-[2px]"
         >
-          Est. 2020
+          Est. 2004
         </motion.div>
 
         {/* Floating status card */}
@@ -130,25 +212,35 @@ export default function HeroSection() {
             border: "1px solid rgba(247,245,240,0.14)",
           }}
         >
-          {[
-            { label: "Active Shipments", value: "2,840" },
-            { label: "Ports Connected",  value: "340+"  },
-          ].map((stat) => (
-            <div key={stat.label}>
-              <div className="text-[10px] font-medium tracking-[0.1em] uppercase text-[rgba(247,245,240,0.45)] mb-1.5">
-                {stat.label}
-              </div>
-              <div
-                style={{ fontFamily: "'DM Serif Display', Georgia, serif" }}
-                className="text-[20px] text-[#F7F5F0] tracking-[-0.01em]"
-              >
-                {stat.value}
-              </div>
+          {/* Active Shipments */}
+          <div>
+            <div className="text-[10px] font-medium tracking-[0.1em] uppercase text-[rgba(247,245,240,0.45)] mb-1.5">
+              Active Shipments
             </div>
-          ))}
+            <div
+              style={{ fontFamily: "'DM Serif Display', Georgia, serif" }}
+              className="text-[20px] text-[#F7F5F0] tracking-[-0.01em]"
+            >
+              <CountUp value={2840} suffix="" duration={1.6} delay={1.1} />
+            </div>
+          </div>
+
+          {/* Ports Connected */}
+          <div>
+            <div className="text-[10px] font-medium tracking-[0.1em] uppercase text-[rgba(247,245,240,0.45)] mb-1.5">
+              Ports Connected
+            </div>
+            <div
+              style={{ fontFamily: "'DM Serif Display', Georgia, serif" }}
+              className="text-[20px] text-[#F7F5F0] tracking-[-0.01em]"
+            >
+              <CountUp value={340} suffix="+" duration={1.3} delay={1.2} />
+            </div>
+          </div>
 
           <div className="w-px h-9 bg-[rgba(247,245,240,0.12)]" />
 
+          {/* Status */}
           <div>
             <div className="text-[10px] font-medium tracking-[0.1em] uppercase text-[rgba(247,245,240,0.45)] mb-1.5">
               System Status

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 
 const industries = [
@@ -108,18 +109,20 @@ export default function IndustriesSection() {
               </p>
 
               {/* Arrow — reveals on hover */}
-              <div className="mt-auto pt-2 flex items-center gap-2 text-[12px] font-medium tracking-[0.04em] uppercase text-transparent group-hover:text-[#F7F5F0]/80 transition-all duration-300 -translate-x-1 group-hover:translate-x-0">
-                Learn more
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                  <path
-                    d="M2 6h8M7 3l3 3-3 3"
-                    stroke="currentColor"
-                    strokeWidth="1.2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
+              <Link href="/industries#industries">
+                <div className="mt-auto pt-2 flex items-center gap-2 text-[12px] font-medium tracking-[0.04em] uppercase text-transparent group-hover:text-[#F7F5F0]/80 transition-all duration-300 -translate-x-1 group-hover:translate-x-0">
+                  Learn more
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path
+                      d="M2 6h8M7 3l3 3-3 3"
+                      stroke="currentColor"
+                      strokeWidth="1.2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
+              </Link>
             </motion.div>
           ))}
         </div>

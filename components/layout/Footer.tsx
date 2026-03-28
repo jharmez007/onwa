@@ -72,8 +72,8 @@ export default function Footer() {
           </h4>
           <ul className="space-y-3.5">
             {[
-              { label: "Email",    value: "info@maritimeco.com" },
-              { label: "Phone",    value: "+234 000 000 0000"   },
+              { label: "Email",    value: "cajetanemeka@yahoo.com" },
+              { label: "Phone",    value: "+234 806 087 3957"   },
               { label: "Location", value: "Lagos, Nigeria"      },
             ].map((item) => (
               <li key={item.label} className="text-[13px]">

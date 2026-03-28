@@ -1,8 +1,39 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useInView, useMotionValue, useTransform, animate } from "framer-motion";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import Button from "@/components/ui/Button";
+
+function CountUp({
+  value,
+  suffix = "",
+  duration = 1.4,
+  delay = 0,
+}: {
+  value: number;
+  suffix?: string;
+  duration?: number;
+  delay?: number;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const motionVal = useMotionValue(0);
+  const rounded = useTransform(motionVal, (v) => `${Math.round(v)}${suffix}`);
+  const inView = useInView(ref, { once: true });
+
+  useEffect(() => {
+    if (!inView) return;
+    const timeout = setTimeout(() => {
+      animate(motionVal, value, {
+        duration,
+        ease: [0.16, 1, 0.3, 1],
+      });
+    }, delay * 1000);
+    return () => clearTimeout(timeout);
+  }, [inView, value, duration, delay, motionVal]);
+
+  return <motion.span ref={ref}>{rounded}</motion.span>;
+}
 
 const teamMembers = [
   {
@@ -133,7 +164,7 @@ export default function AboutPage() {
                 style={{ fontFamily: "'DM Serif Display', Georgia, serif" }}
                 className="text-[36px] leading-none tracking-[-0.02em] text-[#1A1814]"
               >
-                75+
+                <CountUp value={75} suffix="+" duration={1.4} delay={0.6} />
               </div>
               <div className="mt-2 text-[11px] font-medium tracking-[0.08em] uppercase text-[#B0ADA8]">
                 Countries Served

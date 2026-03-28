@@ -1,7 +1,48 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useInView, useMotionValue, useTransform, animate } from "framer-motion";
+import { useEffect, useRef } from "react";
 import Button from "@/components/ui/Button";
+
+// ── Animated counter ──────────────────────────────────────────────────────────
+function CountUp({
+  value,
+  suffix = "",
+  prefix = "",
+  duration = 1.4,
+  delay = 0,
+}: {
+  value: number;
+  suffix?: string;
+  prefix?: string;
+  duration?: number;
+  delay?: number;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const motionVal = useMotionValue(0);
+  const rounded = useTransform(motionVal, (v) => `${prefix}${Math.round(v)}${suffix}`);
+  const inView = useInView(ref, { once: true });
+
+  useEffect(() => {
+    if (!inView) return;
+    const timeout = setTimeout(() => {
+      animate(motionVal, value, {
+        duration,
+        ease: [0.16, 1, 0.3, 1],
+      });
+    }, delay * 1000);
+    return () => clearTimeout(timeout);
+  }, [inView, value, duration, delay, motionVal]);
+
+  return <motion.span ref={ref}>{rounded}</motion.span>;
+}
+
+const stats = [
+  { value: 120, suffix: "+", label: "Countries Served",    duration: 1.4, delay: 0.0 },
+  { value: 98,  suffix: "%", label: "On-Time Delivery",    duration: 1.2, delay: 0.1 },
+  { value: 500, suffix: "+", label: "Clients Worldwide",   duration: 1.5, delay: 0.2 },
+  { value: 20,  suffix: "+", label: "Years of Experience", duration: 1.1, delay: 0.3 },
+];
 
 export default function CTASection() {
   return (
@@ -10,20 +51,18 @@ export default function CTASection() {
       className="bg-[#1A1814] relative overflow-hidden"
     >
 
-      {/* Subtle background texture — amber glow, top-right */}
+      {/* Amber glow — top right */}
       <div
         className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full pointer-events-none"
         style={{
-          background:
-            "radial-gradient(circle, rgba(196,135,58,0.08) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(196,135,58,0.08) 0%, transparent 70%)",
         }}
       />
-      {/* Bottom-left mirror */}
+      {/* Amber glow — bottom left */}
       <div
         className="absolute -bottom-32 -left-32 w-[400px] h-[400px] rounded-full pointer-events-none"
         style={{
-          background:
-            "radial-gradient(circle, rgba(196,135,58,0.05) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(196,135,58,0.05) 0%, transparent 70%)",
         }}
       />
 
@@ -77,10 +116,9 @@ export default function CTASection() {
               Contact Us →
             </button>
           </motion.div>
-
         </div>
 
-        {/* Bottom stats row */}
+        {/* Bottom stats row — animated */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -88,18 +126,18 @@ export default function CTASection() {
           viewport={{ once: true }}
           className="mt-20 pt-12 border-t border-[#F7F5F0]/8 grid grid-cols-2 md:grid-cols-4 gap-8"
         >
-          {[
-            { num: "120+", label: "Countries Served"    },
-            { num: "98%",  label: "On-Time Delivery"    },
-            { num: "500+", label: "Clients Worldwide"   },
-            { num: "20+",  label: "Years of Experience" },
-          ].map((stat, i) => (
+          {stats.map((stat) => (
             <div key={stat.label} className="text-center">
               <div
                 style={{ fontFamily: "'DM Serif Display', Georgia, serif" }}
                 className="text-[32px] leading-none tracking-[-0.02em] text-[#F7F5F0]"
               >
-                {stat.num}
+                <CountUp
+                  value={stat.value}
+                  suffix={stat.suffix}
+                  duration={stat.duration}
+                  delay={stat.delay}
+                />
               </div>
               <div className="mt-2 text-[11px] font-medium tracking-[0.08em] uppercase text-[#F7F5F0]/35">
                 {stat.label}

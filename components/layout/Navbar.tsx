@@ -9,12 +9,12 @@ import { HiMenu, HiX } from "react-icons/hi";
 import Button from "@/components/ui/Button";
 
 const navLinks = [
-  { name: "Home",         href: "/" },
-  { name: "About",        href: "/about" },
-  { name: "Services",     href: "/services" },
-  { name: "Industries",   href: "/industries" },
+  { name: "Home",         href: "/"            },
+  { name: "About",        href: "/about"        },
+  { name: "Services",     href: "/services"     },
+  { name: "Industries",   href: "/industries"   },
   { name: "Case Studies", href: "/case-studies" },
-  { name: "Contact",      href: "/contact" },
+  { name: "Contact",      href: "/contact"      },
 ];
 
 export default function Navbar() {
@@ -29,15 +29,31 @@ export default function Navbar() {
 
       <div className="container-custom flex items-center justify-between h-[72px]">
 
-        {/* Logo */}
-        <Link href="/" className="flex items-center">
+        {/* Logo + Wordmark */}
+        <Link href="/" className="flex items-center gap-3 group">
           <Image
             src="/logo.png"
-            width={70}
-            height={70}
+            width={38}
+            height={38}
             alt="Onwa-na Aku logo"
             className="object-contain"
           />
+
+          {/* Vertical divider */}
+          <span className="w-px h-5 bg-[#1A1814]/15" />
+
+          {/* Wordmark */}
+          <div className="flex flex-col leading-none">
+            <span
+              style={{ fontFamily: "'DM Serif Display', Georgia, serif" }}
+              className="text-[15px] tracking-[-0.01em] text-[#1A1814] group-hover:text-[#1A1814] transition-colors duration-200"
+            >
+              Onwa-na Aku
+            </span>
+            <span className="text-[9px] font-medium tracking-[0.12em] uppercase text-[#C4873A] mt-0.5">
+              Maritime · Logistics
+            </span>
+          </div>
         </Link>
 
         {/* Desktop Nav */}
@@ -59,7 +75,7 @@ export default function Navbar() {
 
         {/* Desktop CTA */}
         <div className="hidden md:block">
-          <Button>Get a Quote</Button>
+          <Link href="/contact"><Button>Get a Quote</Button></Link>
         </div>
 
         {/* Mobile Toggle */}
@@ -106,7 +122,8 @@ export default function Navbar() {
                 </motion.div>
               ))}
 
-              <motion.div
+              <Link href="/contact" onClick={() => setOpen(false)}>
+               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.2, delay: navLinks.length * 0.04 }}
@@ -114,6 +131,8 @@ export default function Navbar() {
               >
                 <Button className="w-full">Get a Quote</Button>
               </motion.div>
+              </Link>
+             
 
             </div>
           </motion.div>

@@ -1,8 +1,39 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useInView, useMotionValue, useTransform, animate } from "framer-motion";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import Button from "@/components/ui/Button";
+
+function CountUp({
+  value,
+  suffix = "",
+  duration = 1.4,
+  delay = 0,
+}: {
+  value: number;
+  suffix?: string;
+  duration?: number;
+  delay?: number;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const motionVal = useMotionValue(0);
+  const rounded = useTransform(motionVal, (v) => `${Math.round(v * 10) / 10}${suffix}`);
+  const inView = useInView(ref, { once: true });
+
+  useEffect(() => {
+    if (!inView) return;
+    const timeout = setTimeout(() => {
+      animate(motionVal, value, {
+        duration,
+        ease: [0.16, 1, 0.3, 1],
+      });
+    }, delay * 1000);
+    return () => clearTimeout(timeout);
+  }, [inView, value, duration, delay, motionVal]);
+
+  return <motion.span ref={ref}>{rounded}</motion.span>;
+}
 
 const services = [
   {
@@ -206,17 +237,20 @@ export default function ServicesPage() {
             className="hidden lg:grid grid-cols-2 gap-px bg-[#1A1814]/8 border border-[#1A1814]/8"
           >
             {[
-              { num: "150+",  label: "Ports Connected"  },
-              { num: "99.2%", label: "On-Time Delivery" },
-              { num: "75",    label: "Countries Served" },
-              { num: "24/7",  label: "Live Support"     },
+            { num: 150,   suffix: "+",  label: "Ports Connected",  duration: 1.4, delay: 0.7  },
+            { num: 99.2,  suffix: "%",  label: "On-Time Delivery", duration: 1.2, delay: 0.85 },
+            { num: 75,    suffix: "",   label: "Countries Served", duration: 1.1, delay: 0.95 },
+            { num: null,  suffix: "",   label: "Live Support",     duration: 0,   delay: 0    },
             ].map((stat) => (
-              <div key={stat.label} className="bg-[#F7F5F0] p-10 flex flex-col gap-2">
+            <div key={stat.label} className="bg-[#F7F5F0] p-10 flex flex-col gap-2">
                 <div
-                  style={{ fontFamily: "'DM Serif Display', Georgia, serif" }}
-                  className="text-[36px] leading-none tracking-[-0.02em] text-[#1A1814]"
+                style={{ fontFamily: "'DM Serif Display', Georgia, serif" }}
+                className="text-[36px] leading-none tracking-[-0.02em] text-[#1A1814]"
                 >
-                  {stat.num}
+                {stat.num !== null
+                    ? <CountUp value={stat.num} suffix={stat.suffix} duration={stat.duration} delay={stat.delay} />
+                    : "24/7"
+                }
                 </div>
                 <div className="text-[11px] font-medium tracking-[0.08em] uppercase text-[#B0ADA8]">
                   {stat.label}

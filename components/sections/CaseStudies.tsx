@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Button from "@/components/ui/Button";
+import Link from "next/link";
 
 const caseStudies = [
   {
@@ -120,18 +121,20 @@ export default function CaseStudies() {
                 </p>
 
                 {/* Read more */}
-                <div className="mt-auto pt-2 flex items-center gap-2 text-[12px] font-medium tracking-[0.04em] uppercase text-[#1A1814]/0 group-hover:text-[#1A1814] transition-all duration-300 -translate-x-1 group-hover:translate-x-0">
-                  Read case study
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                    <path
-                      d="M2 6h8M7 3l3 3-3 3"
-                      stroke="currentColor"
-                      strokeWidth="1.2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
+                <Link href="/case-studies#studies">
+                  <div className="mt-auto pt-2 flex items-center gap-2 text-[12px] font-medium tracking-[0.04em] uppercase text-[#1A1814]/0 group-hover:text-[#1A1814] transition-all duration-300 -translate-x-1 group-hover:translate-x-0">
+                    Read case study
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                      <path
+                        d="M2 6h8M7 3l3 3-3 3"
+                        stroke="currentColor"
+                        strokeWidth="1.2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </div>
+                </Link>
               </div>
             </motion.div>
           ))}
@@ -139,7 +142,9 @@ export default function CaseStudies() {
 
         {/* CTA */}
         <div className="mt-10 flex items-center gap-6">
-          <Button>View All Case Studies</Button>
+          <Link href="/case-studies#studies">
+            <Button>View All Case Studies</Button>
+          </Link>
           <span className="text-[12px] text-[#B0ADA8] tracking-[0.02em]">
             3 featured studies
           </span>
