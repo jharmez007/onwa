@@ -196,7 +196,7 @@ export default function HeroSection() {
           transition={{ duration: 0.5, delay: 1 }}
           className="absolute top-8 right-8 bg-[#C4873A] text-white text-[10px] font-medium tracking-[0.1em] uppercase px-3.5 py-1.5 rounded-[2px]"
         >
-          Est. 2004
+          Est. 2015
         </motion.div>
 
         {/* Floating status card */}
