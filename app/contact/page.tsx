@@ -66,7 +66,7 @@ export default function ContactPage() {
 
   const inputClass = `
     mt-2 w-full bg-[#F7F5F0] border border-[#1A1814]/10 rounded-[2px]
-    px-4 py-3 text-[13px] text-[#1A1814] placeholder:text-[#B0ADA8]
+    px-4 py-3 text-base text-[#1A1814] placeholder:text-[#B0ADA8]
     outline-none focus:border-[#C4873A] focus:bg-white
     transition-all duration-200
   `;
