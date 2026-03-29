@@ -75,7 +75,7 @@ export default function Navbar() {
 
         {/* Desktop CTA */}
         <div className="hidden md:block">
-          <Link href="/contact"><Button>Get a Quote</Button></Link>
+          <Link href="/contact#contact"><Button>Get a Quote</Button></Link>
         </div>
 
         {/* Mobile Toggle */}
@@ -122,7 +122,7 @@ export default function Navbar() {
                 </motion.div>
               ))}
 
-              <Link href="/contact" onClick={() => setOpen(false)}>
+              <Link href="/contact#contact" onClick={() => setOpen(false)}>
                <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}

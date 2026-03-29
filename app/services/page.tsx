@@ -217,7 +217,7 @@ export default function ServicesPage() {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="mt-10 flex items-center gap-5"
             >
-              <Link href="/contact">
+              <Link href="/contact/#contact">
                 <Button>Get a Custom Quote</Button>
               </Link>
               <Link
@@ -506,11 +506,11 @@ export default function ServicesPage() {
               viewport={{ once: true }}
               className="mt-10 flex items-center justify-center gap-5"
             >
-              <Link href="/contact">
+              <Link href="/contact#contact">
                 <Button>Get a Custom Quote</Button>
               </Link>
               <Link
-                href="/contact"
+                href="/contact#contact"
                 className="text-[13px] font-medium tracking-[0.04em] uppercase text-[#6B6860] hover:text-[#1A1814] transition-colors duration-200"
               >
                 Contact Us →

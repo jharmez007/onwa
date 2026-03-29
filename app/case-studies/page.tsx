@@ -293,7 +293,7 @@ export default function CaseStudiesPage() {
               viewport={{ once: true }}
               className="mt-10 flex items-center justify-center gap-5"
             >
-              <Link href="/contact">
+              <Link href="/contact#contact">
                 <Button>Request a Free Strategy Call</Button>
               </Link>
               <Link

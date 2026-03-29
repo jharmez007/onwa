@@ -117,7 +117,7 @@ export default function HeroSection() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="flex flex-wrap items-center gap-4 mt-10"
         >
-          <Link href="/contact">
+          <Link href="/contact#contact">
             <Button>Get a Quote</Button>
           </Link>
           <Link href="/services">

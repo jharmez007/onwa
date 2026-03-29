@@ -447,7 +447,7 @@ export default function AboutPage() {
               viewport={{ once: true }}
               className="mt-10 flex items-center justify-center gap-5"
             >
-              <Link href="/contact">
+              <Link href="/contact#contact">
                 <Button>Get In Touch</Button>
               </Link>
               <Link

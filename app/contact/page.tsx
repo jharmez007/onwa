@@ -177,7 +177,7 @@ export default function ContactPage() {
       </section>
 
       {/* ── FORM + SIDEBAR ── */}
-      <section className="bg-[#F7F5F0]">
+      <section className="bg-[#F7F5F0]" id="#contact">
         <div className="container-custom py-24 grid lg:grid-cols-[1fr_400px] gap-12 items-start">
 
           {/* Form */}
