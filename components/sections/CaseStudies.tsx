@@ -12,6 +12,7 @@ const caseStudies = [
     description:
       "We helped a major port streamline its operations, improving turnaround times and operational efficiency.",
     tag: "Port Operations",
+    image: "https://images.pexels.com/photos/6595779/pexels-photo-6595779.jpeg"
   },
   {
     number: "02",
@@ -20,6 +21,7 @@ const caseStudies = [
     description:
       "Our strategy restructured a client's global supply chain, reducing costs and improving delivery timelines.",
     tag: "Supply Chain",
+    image: "https://picsum.photos/seed/case16/600/400"
   },
   {
     number: "03",
@@ -28,6 +30,7 @@ const caseStudies = [
     description:
       "We implemented a compliance framework that eliminated customs delays and improved documentation accuracy.",
     tag: "Compliance",
+    image: "https://images.pexels.com/photos/28185416/pexels-photo-28185416.jpeg"
   },
 ];
 
@@ -79,7 +82,7 @@ export default function CaseStudies() {
               {/* Image placeholder */}
               <div className="relative h-48 bg-[#1A1814] overflow-hidden">
                 <img
-                  src={`https://picsum.photos/seed/case${index + 1}/600/400`}
+                  src={study.image}
                   alt={study.title}
                   className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-500"
                 />

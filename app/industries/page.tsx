@@ -48,7 +48,7 @@ const industries = [
       "Freight rate negotiation",
     ],
     stat: "150+ ports",
-    image: "https://picsum.photos/seed/maritime-shipping/800/600",
+    image: "https://images.pexels.com/photos/12903694/pexels-photo-12903694.jpeg",
   },
   {
     number: "02",
@@ -62,7 +62,7 @@ const industries = [
       "Pipeline & terminal advisory",
     ],
     stat: "ISO certified",
-    image: "https://picsum.photos/seed/energy-oil/800/600",
+    image: "https://images.pexels.com/photos/35105445/pexels-photo-35105445.jpeg",
   },
   {
     number: "03",
@@ -76,7 +76,7 @@ const industries = [
       "Inventory management",
     ],
     stat: "30% cost reduction",
-    image: "https://picsum.photos/seed/manufacturing-plant/800/600",
+    image: "https://images.pexels.com/photos/14804699/pexels-photo-14804699.jpeg",
   },
   {
     number: "04",
@@ -90,7 +90,7 @@ const industries = [
       "Cross-border e-commerce",
     ],
     stat: "99.2% on-time",
-    image: "https://picsum.photos/seed/retail-warehouse/800/600",
+    image: "https://images.pexels.com/photos/8311885/pexels-photo-8311885.jpeg",
   },
   {
     number: "05",
@@ -104,7 +104,7 @@ const industries = [
       "Customs & import licensing",
     ],
     stat: "100% compliant",
-    image: "https://picsum.photos/seed/pharma-lab/800/600",
+    image: "https://images.pexels.com/photos/9742765/pexels-photo-9742765.jpeg",
   },
   {
     number: "06",
@@ -118,7 +118,7 @@ const industries = [
       "Dealer network distribution",
     ],
     stat: "75 countries",
-    image: "https://picsum.photos/seed/automotive-factory/800/600",
+    image: "https://images.pexels.com/photos/33887723/pexels-photo-33887723.jpeg",
   },
 ];
 

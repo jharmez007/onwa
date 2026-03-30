@@ -4,6 +4,7 @@ import { motion, useInView, useMotionValue, useTransform, animate } from "framer
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import Button from "@/components/ui/Button";
+import { image } from "framer-motion/client";
 
 function CountUp({
   value,
@@ -37,28 +38,33 @@ function CountUp({
 
 const teamMembers = [
   {
-    name: "Captain James Okonkwo",
+    name: "Chief Agu Cajetan Chukwemeka",
     role: "Chief Executive Officer",
     bio: "20+ years in maritime logistics with a track record of scaling global operations.",
     initials: "JO",
+    image: "/team-1.png",
   },
   {
-    name: "Victoria Adeyemi",
+    name: "Agu Tochukwu Theodora",
     role: "Head of Operations",
     bio: "Expert in supply chain optimization and carrier partnerships across 50+ ports.",
     initials: "VA",
+    image: "/team-2.jpeg",
   },
   {
-    name: "Dr. Kwame Mensah",
+    name: "Engr. Agu James Nnamdi",
     role: "Director of Technology",
     bio: "Built custom logistics platforms serving 100+ enterprises worldwide.",
     initials: "KM",
+    image: "/team-3.png",
   },
   {
-    name: "Amara Nwosu",
+    name: "Agu John Nnabuike",
     role: "Head of Client Relations",
     bio: "Dedicated to ensuring every client receives exceptional, personalized service.",
     initials: "AN",
+    image: "/team-4.jpeg",
+
   },
 ];
 
@@ -372,7 +378,7 @@ export default function AboutPage() {
                 {/* Image */}
                 <div className="relative h-56 bg-[#252219] overflow-hidden">
                   <img
-                    src={`https://picsum.photos/seed/team${i + 1}/400/300`}
+                    src={member.image}
                     alt={member.name}
                     className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-500"
                   />

@@ -14,7 +14,7 @@ const caseStudies = [
     solution: "Realigned multimodal transport routes, implemented predictive ETA tracking, and consolidated fragmented shipments.",
     outcome: "Yearly savings of $4.2M with a 30% faster order-to-delivery cycle.",
     stat: "$4.2M saved",
-    image: "https://picsum.photos/seed/supply-chain-mfg/800/600",
+    image: "https://images.pexels.com/photos/18329018/pexels-photo-18329018.jpeg",
   },
   {
     number: "02",
@@ -25,7 +25,7 @@ const caseStudies = [
     solution: "Deployed a temperature-controlled lane with dynamic transfer optimization and real-time cold chain monitoring.",
     outcome: "Customer retention jumped by 45% and product loss dropped to under 1%.",
     stat: "70% less spoilage",
-    image: "https://picsum.photos/seed/cold-chain-cargo/800/600",
+    image: "https://images.pexels.com/photos/27773577/pexels-photo-27773577.jpeg",
   },
   {
     number: "03",
@@ -36,7 +36,7 @@ const caseStudies = [
     solution: "Centralized vendor partnerships and introduced real-time berth slot negotiation through our logistics platform.",
     outcome: "Annual demurrage savings exceeded $2.7M with improved throughput capacity.",
     stat: "$2.7M in savings",
-    image: "https://picsum.photos/seed/port-steel-bulk/800/600",
+    image: "https://images.pexels.com/photos/1624695/pexels-photo-1624695.jpeg",
   },
 ];
 

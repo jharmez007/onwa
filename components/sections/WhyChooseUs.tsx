@@ -157,7 +157,7 @@ export default function WhyChooseUs() {
           {/* Main image */}
           <div className="relative overflow-hidden rounded-[4px] aspect-[4/5]">
             <img
-              src="https://picsum.photos/seed/maritime2/700/900"
+              src="https://images.pexels.com/photos/8977001/pexels-photo-8977001.jpeg"
               alt="Maritime operations"
               className="w-full h-full object-cover"
             />

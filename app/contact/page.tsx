@@ -150,7 +150,7 @@ export default function ContactPage() {
           >
             <div className="relative overflow-hidden rounded-[4px] aspect-[4/3]">
               <img
-                src="https://picsum.photos/seed/contact-maritime/800/600"
+                src="https://images.pexels.com/photos/6169643/pexels-photo-6169643.jpeg"
                 alt="Contact us"
                 className="w-full h-full object-cover"
               />
